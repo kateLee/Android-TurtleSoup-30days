@@ -1,5 +1,6 @@
 package kate.tutorial.turtlesoup
 
+import kate.tutorial.turtlesoup.puzzle.PuzzleService
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -20,4 +21,6 @@ class Repository {
             .client(builder.build())
             .build()
     }
+    private val puzzleService = retrofit.create(PuzzleService::class.java)
+    suspend fun getPuzzles() = puzzleService.getPuzzles()
 }
