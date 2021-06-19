@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="puzzle"
+            type="kate.tutorial.turtlesoup.puzzle.Puzzle" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/puzzle_margin" >
+        <ImageView
+            android:id="@+id/puzzle_image"
+            android:layout_width="@dimen/avatar_size"
+            android:layout_height="@dimen/avatar_size"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/puzzle_image"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:imageUrl="@{puzzle.avatar}" />
+
+        <TextView
+            android:id="@+id/puzzle_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/puzzle_margin"
+            android:layout_marginEnd="@dimen/puzzle_margin"
+            android:text="@{puzzle.attendance}"
+            android:maxLength="3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/puzzle_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/puzzle_margin"
+            android:layout_marginEnd="@dimen/puzzle_margin"
+            android:text="@{puzzle.title}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/puzzle_image"
+            app:layout_constraintRight_toLeftOf="@id/puzzle_subtitle"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

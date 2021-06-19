@@ -1,3 +1,5 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="puzzle_margin">8dp</dimen>
+    <dimen name="avatar_size">48dp</dimen>
 </resources>
