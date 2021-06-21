@@ -8,42 +8,69 @@
             type="kate.tutorial.turtlesoup.puzzle.Puzzle" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
+        android:theme="@style/Theme.MaterialComponents.Light"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/puzzle_margin" >
-        <ImageView
-            android:id="@+id/puzzle_image"
-            android:layout_width="@dimen/avatar_size"
-            android:layout_height="@dimen/avatar_size"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/puzzle_image"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:imageUrl="@{puzzle.avatar}" />
+        android:layout_margin="@dimen/puzzle_margin"
+        app:cardCornerRadius="@dimen/puzzle_margin"
+        app:cardElevation="@dimen/puzzle_margin" >
 
-        <TextView
-            android:id="@+id/puzzle_subtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/puzzle_margin"
-            android:layout_marginEnd="@dimen/puzzle_margin"
-            android:text="@{puzzle.attendance}"
-            android:maxLength="3"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
 
-        <TextView
-            android:id="@+id/puzzle_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/puzzle_margin"
-            android:layout_marginEnd="@dimen/puzzle_margin"
-            android:text="@{puzzle.title}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/puzzle_image"
-            app:layout_constraintRight_toLeftOf="@id/puzzle_subtitle"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/puzzle_image"
+                android:theme="@style/Theme.MaterialComponents.Light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/puzzle_margin"
+                android:layout_marginStart="@dimen/puzzle_margin"
+                app:cardCornerRadius="@dimen/avatar_radius"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" >
+                <ImageView
+                    android:layout_width="@dimen/avatar_size"
+                    android:layout_height="@dimen/avatar_size"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/puzzle_image"
+                    app:imageUrl="@{puzzle.avatar}" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/puzzle_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/puzzle_margin"
+                android:layout_marginEnd="@dimen/puzzle_margin"
+                android:text="@{puzzle.attendance}"
+                android:maxLength="3"
+                style="@style/TextAppearance.AppCompat.Subhead"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/puzzle_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/puzzle_margin"
+                android:layout_marginEnd="@dimen/puzzle_margin"
+                android:text="@{puzzle.title}"
+                style="@style/TextAppearance.AppCompat.Title"
+                app:layout_constraintTop_toTopOf="@id/puzzle_image"
+                app:layout_constraintStart_toEndOf="@id/puzzle_image"
+                app:layout_constraintEnd_toStartOf="@id/puzzle_subtitle" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/tags"
+                android:theme="@style/Theme.MaterialComponents.Light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{puzzle.tags}"
+                app:layout_constraintTop_toBottomOf="@id/puzzle_title"
+                app:layout_constraintStart_toStartOf="@id/puzzle_title" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 </layout>
