@@ -1,5 +1,6 @@
 package kate.tutorial.turtlesoup
 
+import kate.tutorial.turtlesoup.puzzle.PuzzleRequest
 import kate.tutorial.turtlesoup.puzzle.PuzzleService
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -23,4 +24,9 @@ class Repository {
     }
     private val puzzleService = retrofit.create(PuzzleService::class.java)
     suspend fun getPuzzles() = puzzleService.getPuzzles()
+    suspend fun getPuzzleDetail(id: String) = puzzleService.getPuzzleDetail(id)
+    suspend fun postPuzzleDetail(title: String, description: String, tags: String) = puzzleService.postPuzzle(
+        PuzzleRequest(title, description, tags)
+    )
+    suspend fun deletePuzzle(id: String) = puzzleService.deletePuzzle(id)
 }
