@@ -54,6 +54,11 @@ class PuzzlesFragment : Fragment() {
                 }
             }
         }))
+        binding.fab.setOnClickListener {
+            val action =
+                PuzzlesFragmentDirections.actionPuzzlesFragmentToPuzzlePostActivity()
+            NavHostFragment.findNavController(this).navigate(action)
+        }
 
         val itemDecoration = DividerItemDecoration(requireContext(), VERTICAL)
         itemDecoration.setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.diveder)!!)

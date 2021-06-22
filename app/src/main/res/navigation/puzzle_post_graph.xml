@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation android:id="@+id/nav_graph"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/PuzzlePostFragment">
+
+    <fragment
+        android:id="@+id/PuzzlePostFragment"
+        android:name="kate.tutorial.turtlesoup.puzzle.PuzzlePostFragment"
+        android:label="@string/puzzle_post_fragment_label"
+        tools:layout="@layout/fragment_post_puzzle">
+    </fragment>
+</navigation>

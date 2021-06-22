@@ -41,6 +41,15 @@ xmlns:tools="http://schemas.android.com/tools">
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/outline_add_24" />
+
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
