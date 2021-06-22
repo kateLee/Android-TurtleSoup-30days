@@ -12,8 +12,18 @@
         tools:layout="@layout/fragment_puzzles">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_PuzzlesFragment_to_PuzzleFragment"
+            app:destination="@id/PuzzleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/PuzzleFragment"
+        android:name="kate.tutorial.turtlesoup.puzzle.PuzzleFragment"
+        android:label=""
+        tools:layout="@layout/fragment_puzzle">
+
+        <argument
+            android:name="puzzleId"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/FirstFragment"

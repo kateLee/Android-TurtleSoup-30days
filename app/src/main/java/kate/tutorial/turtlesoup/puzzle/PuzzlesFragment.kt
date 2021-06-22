@@ -8,9 +8,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
+import kate.tutorial.turtlesoup.OnRecyclerItemTouchListener
 import kate.tutorial.turtlesoup.R
 import kate.tutorial.turtlesoup.databinding.FragmentPuzzlesBinding
 
@@ -44,6 +45,15 @@ class PuzzlesFragment : Fragment() {
 
         binding.swipeRefreshLayout.setOnRefreshListener { fragmentViewModel.refreshPuzzles() }
         binding.puzzleList.adapter = PuzzleAdapter(fragmentViewModel.puzzles.value ?: ArrayList())
+        binding.puzzleList.addOnItemTouchListener(OnRecyclerItemTouchListener(onItemClick = { viewHolder ->
+            if (viewHolder is PuzzleAdapter.ViewHolder) {
+                viewHolder.getPuzzle()?.also {
+                    val action =
+                        PuzzlesFragmentDirections.actionPuzzlesFragmentToPuzzleFragment(it.id)
+                    NavHostFragment.findNavController(this).navigate(action)
+                }
+            }
+        }))
 
         val itemDecoration = DividerItemDecoration(requireContext(), VERTICAL)
         itemDecoration.setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.diveder)!!)
