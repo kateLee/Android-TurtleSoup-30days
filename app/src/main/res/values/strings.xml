@@ -19,6 +19,8 @@
     <string name="title">title</string>
     <string name="hint_description">description</string>
     <string name="tags">tags</string>
+    <string name="error_form">Please fill up all fields!</string>
+    <string name="success_puzzle_post">Puzzle Post successfully!</string>
 
     <string name="content_description_favorite">Show your favorite puzzles</string>
     <string name="content_description_search">Search puzzles</string>

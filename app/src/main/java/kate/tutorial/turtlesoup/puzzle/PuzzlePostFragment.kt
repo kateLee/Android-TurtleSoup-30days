@@ -2,10 +2,10 @@ package kate.tutorial.turtlesoup.puzzle
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
 import kate.tutorial.turtlesoup.R
 import kate.tutorial.turtlesoup.databinding.FragmentPostPuzzleBinding
 
@@ -33,19 +33,19 @@ class PuzzlePostFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        fragmentViewModel.requestError.observe(viewLifecycleOwner, Observer<String> {
-            AlertDialog.Builder(requireContext())
-                .setMessage(it)
-                .setPositiveButton(R.string.retry) { _, _ ->  }
-                .setNegativeButton(R.string.finish) { _, _ -> }
-                .setCancelable(true)
-                .show()
+        fragmentViewModel.requestError.observe(viewLifecycleOwner, {
+            Snackbar.make(view, it, Snackbar.LENGTH_SHORT).show()
         })
-        fragmentViewModel.puzzle.observe(viewLifecycleOwner, Observer<PuzzleDetail> {
+        fragmentViewModel.puzzle.observe(viewLifecycleOwner, {
+            Toast.makeText(requireActivity(), R.string.success_puzzle_post, Toast.LENGTH_SHORT).show()
             requireActivity().finish()
         })
     }
     fun postPuzzle() {
+        if (binding.title.text.toString().trim().isEmpty() || binding.description.text.toString().trim().isEmpty() || binding.tags.text.toString().trim().isEmpty()) {
+            Snackbar.make(binding.title, R.string.success_puzzle_post, Snackbar.LENGTH_SHORT).show()
+            return
+        }
         fragmentViewModel.postPuzzle(binding.title.text.toString(), binding.description.text.toString(), binding.tags.text.toString())
     }
 }
