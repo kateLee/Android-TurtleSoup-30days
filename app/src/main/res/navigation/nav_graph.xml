@@ -27,6 +27,20 @@
         <argument
             android:name="puzzleId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_PuzzleFragment_to_ChatsFragment"
+            app:destination="@id/ChatsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ChatsFragment"
+        android:name="kate.tutorial.turtlesoup.chat.ChatsFragment"
+        android:label=""
+        tools:layout="@layout/fragment_chats">
+
+        <argument
+            android:name="id"
+            app:argType="string" />
     </fragment>
 
     <activity
