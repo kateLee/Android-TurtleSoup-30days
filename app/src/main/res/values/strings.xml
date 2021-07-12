@@ -31,6 +31,12 @@
     <string name="menu_puzzles">All Puzzles</string>
     <string name="menu_puzzles_belong_to_me">Puzzles belong to me</string>
 
+    <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="default_notification_channel_name" translatable="true">Puzzle</string>
+    <string name="msg_subscribe_failed">Failed to subscribe to puzzle topic</string>
+    <string name="fcm_message">FCM Message</string>
+
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>

@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -59,6 +60,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.8.1'
 
     implementation "io.ktor:ktor-client-okhttp:$ktor_version"
+
+    implementation 'com.google.firebase:firebase-messaging-ktx:22.0.0'
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
