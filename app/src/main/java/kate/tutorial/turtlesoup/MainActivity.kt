@@ -1,6 +1,7 @@
 package kate.tutorial.turtlesoup
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -9,6 +10,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import androidx.navigation.ui.setupWithNavController
+import android.widget.Toast
+import com.google.firebase.messaging.FirebaseMessaging
 import kate.tutorial.turtlesoup.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -39,6 +42,15 @@ class MainActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)
+        FirebaseMessaging.getInstance().subscribeToTopic("Puzzle")
+            .addOnCompleteListener { task ->
+                var msg = "subscribed"
+                if (!task.isSuccessful) {
+                    msg = getString(R.string.msg_subscribe_failed)
+                }
+                Log.d("MainActivity", msg)
+                Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+            }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
