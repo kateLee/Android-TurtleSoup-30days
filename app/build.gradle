@@ -61,8 +61,9 @@ dependencies {
 
     implementation "io.ktor:ktor-client-okhttp:$ktor_version"
 
-    implementation 'com.google.firebase:firebase-messaging-ktx:22.0.0'
-    implementation 'com.google.firebase:firebase-analytics-ktx:19.0.0'
+    implementation platform('com.google.firebase:firebase-bom:28.2.1')
+    implementation 'com.google.firebase:firebase-messaging-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
