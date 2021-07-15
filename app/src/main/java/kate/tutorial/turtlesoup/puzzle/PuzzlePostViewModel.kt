@@ -10,7 +10,6 @@ import kate.tutorial.turtlesoup.request
  * Created by Kate on 2021/6/22
  */
 class PuzzlePostViewModel : ViewModel() {
-    private val repository = Repository()
     var puzzle: MutableLiveData<PuzzleDetail> = MutableLiveData()
     var isLoading: MutableLiveData<Boolean> = MutableLiveData()
     var requestError: MutableLiveData<String> = MutableLiveData()
@@ -22,7 +21,7 @@ class PuzzlePostViewModel : ViewModel() {
         },
         execute = {
             isLoading.postValue( true)
-            puzzle.postValue(repository.postPuzzleDetail(title, description, tags))
+            puzzle.postValue(Repository.postPuzzleDetail(title, description, tags))
             isLoading.postValue(false)
         }
     )

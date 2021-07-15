@@ -10,11 +10,20 @@ import retrofit2.converter.gson.GsonConverterFactory
  * Created by Kate on 2021/6/18
  */
 private const val BASE_URL = "http://192.168.48.3:8080"
-class Repository {
+object Repository {
     private val retrofit: Retrofit
+    var loginToken: String? = null
 
     init {
-        val builder = OkHttpClient.Builder()
+        val builder = OkHttpClient.Builder().addInterceptor { chain ->
+            val requestBuilder = chain.request().newBuilder()
+            loginToken?.let {
+                requestBuilder
+                    .header("Authorization", "Bearer $it")
+
+            }
+            chain.proceed(requestBuilder.build())
+        }
 
         retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
