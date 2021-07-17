@@ -11,6 +11,12 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.navigation.ui.setupWithNavController
 import android.widget.Toast
+import com.firebase.ui.auth.AuthUI
+import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
+import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import kate.tutorial.turtlesoup.databinding.ActivityMainBinding
 
@@ -18,6 +24,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +58,7 @@ class MainActivity : AppCompatActivity() {
                 Log.d("MainActivity", msg)
                 Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
             }
+        auth = Firebase.auth
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -71,9 +79,56 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onStart() { super.onStart()
+        auth.currentUser?: run {
+            createSignInIntent()
+        }
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
+            || super.onSupportNavigateUp()
+    }
+
+    private val signInLauncher = registerForActivityResult(
+        FirebaseAuthUIActivityResultContract()
+    ) { res->
+        this.onSignInResult(res)
+    }
+    private fun createSignInIntent() {
+        // Choose authentication providers
+        val providers = arrayListOf(
+            AuthUI.IdpConfig.EmailBuilder().build(),
+            AuthUI.IdpConfig.GoogleBuilder().build()
+        )
+        // Create and launch sign-in intent
+        val signInIntent = AuthUI.getInstance()
+            .createSignInIntentBuilder()
+            .setAvailableProviders(providers)
+            .build()
+        signInLauncher.launch(signInIntent)
+    }
+    private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
+        val response = result.idpResponse
+        when(result.resultCode) {
+            RESULT_OK-> {// Successfully signed in
+                auth.currentUser?.getIdToken(true)
+                    ?.addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Repository.loginToken = task.result?.token
+                        }
+                    }
+            }
+            RESULT_CANCELED-> finish()
+            else-> {
+                // Sign in failed. If response is null the user canceled the
+                // sign-in flow using the back button. Otherwise check
+                // response.getError().getErrorCode() and handle the error.
+                // ...
+                Log.e("Sign in failed", "errorCode: ${response?.error?.errorCode}")
+                finish()
+            }
+        }
     }
 }
